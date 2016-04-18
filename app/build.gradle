@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "fast.flyer.com.jnidemo"
-        minSdkVersion 21
+        minSdkVersion 11
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -15,12 +15,38 @@ android {
         }
     }
 
+    sourceSets.main {
+   //这里配置相关代码路径
+
+
+        // 配置jni代码路径（默认是在app/sc/main/jni）
+        jni.srcDirs 'src/main/jni'
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    productFlavors{
+//这里配置.so所运行的平台
+        arm {
+           ndk {
+               abiFilter "armeabi"
+            }
+        }
+
+        x86 {
+            ndk {
+                abiFilter "x86"
+            }
+        }
+
+
+    }
+
 }
 
 dependencies {
